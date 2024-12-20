@@ -16,3 +16,6 @@ else
   IFS="|" read USER_ID GAMES_PLAYED BEST_GAME <<< "$USER_RECORD"
   echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 fi
+
+SECRET_NUMBER=$((RANDOM % 1000 +1))
+echo "The secret number is $SECRET_NUMBER (for testing purposes)."
