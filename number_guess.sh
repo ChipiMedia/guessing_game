@@ -45,3 +45,12 @@ do
     echo "It's higher than that, guess again: "
   fi
 done
+
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
+$PSQL "UPDATE users SET games_played = games_played + 1 WHERE user_id = $USER_ID"
+
+BEST_GAME=$($PSQL "SELECT best_game FROM users WHERE user_id = $USER_ID")
+if [[ -z $BEST_GAME || $NUMBER_OF_GUESSES -lt $BEST_GAME ]]
+then
+  $PSQL "UPDATE users SET best_game = $NUMBER_OF_GUESSES WHERE user_id = $USER_ID"
+fi
